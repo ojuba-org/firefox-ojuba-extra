@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Play SWF
+MimeType=application/x-shockwave-flash;
+Exec=firefox %u
+Type=Application
+Terminal=false
+NoDisplay=true
+Actions=play;
+
+[Desktop Action play]
+Name=firefox plugin
+Name[ar]=ثعلب النار
+Comment=Play SWF file using firefox plugin
+Comment[ar]=تشغيل SWF عبر الإضافة في ثعلب النار
+Icon=media-play
+Exec=firefox %u
+

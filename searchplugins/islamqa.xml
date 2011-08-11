@@ -1,0 +1,7 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/" xmlns:os="http://a9.com/-/spec/opensearch/1.1/">
+<os:ShortName>الإسلام سؤال وجواب</os:ShortName>
+<os:InputEncoding>UTF-8</os:InputEncoding>
+<os:Image width="16" height="16">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACN0lEQVQ4jW2Ty08TURjFZ0v4A9ClobCVEpSVMSXGaCru8bEwEat7S3VBiSXiiljqKzGRujCykBJQQER5GR6LSokRB0mEEDBtgwkwLYjSuffnYmbutNGb3Nxvcr+ce+ac82lIMCleouRLIpBS2vW/S3Mb3Y7iGiGt2tklDwgLQErTanT6BAik6i9gWkzAZlNQj2goiqKIYwGKqDsk/sdEUxpIk7W5JBOxTsa6YmR1vQjQBbuTugrSVFcaQFZf5NnFy3yIPWA2/pwnfj/hag8LiV7AEVmwvPOF4wNlTGXfKHBtN29wz1vL9saG0uGPsc3jc37Cnmr2jTwSAQhaU834hitomw/YihTQ5uJxXl6/YQO6Cme/LtFaVcnS+1EEJkhomjjG028RGt4edm3sCQRIhELqH7GxATpqvIxHo4BgcP0FPStdpPfWqBsoZzLz2rJxrCtG58kTSl0XCO56j5LWdRBwbfYMzdOnCMycpWHokCUmoKV1nbCnmkTwVolgi6Pv6L7QBBKWjQWap0/bNyY9KzHq+8swCjnLxvm+V4SrjvCw0c9MvJv+YIjxaJR9wyC9t4pvuIJL4/Vk9laRwPftz9QNlNOWumLZuPVjg0eN5+kPhmir9JBoua0EzR/kSG1OkdycJLO7DoBRyJHcnOLTz48Wg1+5vLJQHxmho7aG+z4fg5F2eltuug6VTJOTRFzhnPP3zhZD7RH6WoIc7Gwpb6zEYufCSaKKsjO6ZlGCpRt9wJqRUrf+AsaOjPFCev/oAAAAAElFTkSuQmCC</os:Image>
+<os:Url type="text/html" method="GET" template="http://www.islamqa.com/ar/search2/{searchTerms}/AllWords/t,q,a"></os:Url>
+<os:Url type="application/x-suggestions+json" method="GET" template="http://suggestqueries.google.com/complete/search?output=firefox&amp;client=firefox&amp;hl={moz:locale}&amp;q={searchTerms} site:islamqa.com"/>
+</SearchPlugin>
