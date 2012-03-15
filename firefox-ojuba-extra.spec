@@ -23,6 +23,8 @@ This package contains the default configuration for firefox in Ojuba Linux.
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/profile/
+cp localstore.rdf $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/profile/
 cp -a searchplugins/* $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
 
 install -D -p -m 644 all-ojuba.js $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/preferences/all-ojuba.js
@@ -48,6 +50,8 @@ do
    done
    mkdir -p $i/defaults/preferences/ || :
    ln -sf %{_libdir}/firefox/defaults/preferences/all-ojuba.js $i/defaults/preferences/all-ojuba.js
+   mkdir -p $i/firefox/defaults/profile/ || :
+   ln -sf %{_libdir}/firefox/defaults/profile/localstore.rdf $i/defaults/profile/localstore.rdf
    ln -sf %{_libdir}/firefox/ojuba-browserconfig.properties $i/ojuba-browserconfig.properties
  fi
 done
@@ -61,7 +65,7 @@ do
    do
      [ -e $i/searchplugins/$j ] && rm $i/searchplugins/$j
    done
-
+   [ -e $i/defaults/profile/localstore.rdf ] && rm -f $i/defaults/profile/localstore.rdf
    [ -e $i/defaults/preferences/all-ojuba.js ] && rm $i/defaults/preferences/all-ojuba.js
    [ -e $i/ojuba-browserconfig.properties ] && rm $i/ojuba-browserconfig.properties
  fi
@@ -72,7 +76,9 @@ done
 %{_libdir}/firefox/ojuba-browserconfig.properties
 %{_libdir}/firefox/searchplugins/*
 %{_libdir}/firefox/defaults/preferences/all-ojuba.js
+%{_libdir}/firefox/defaults/profile/localstore.rdf
 %{_datadir}/applications/firefox-swf.desktop
+
 %changelog
 * Thu Jun 17 2010  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 2.0.0-2
 - use a source tarball
