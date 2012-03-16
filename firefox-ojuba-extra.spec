@@ -35,9 +35,19 @@ echo "browser.startup.homepage=file:///usr/share/doc/HTML/index.html" > $RPM_BUI
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
-%post
-desktop-file-install --rebuild-mime-info-cache %{_datadir}/applications/firefox-swf.desktop
-update-desktop-database
+%posttrans
+desktop-file-install --rebuild-mime-info-cache %{_datadir}/applications/firefox-swf.desktop &> /dev/null || :
+update-desktop-database &> /dev/null || :
+
+PROFILEn=$(echo $RANDOM | base64)
+PROFILE=${PROFILEn/=/o}.default
+mkdir -p /etc/skel/.mozilla/firefox/$PROFILE/ &> /dev/null || :
+#sed -i "s/^\s*\(Path\s*=\s*\).*/\1$PROFILE/" /etc/skel/.mozilla/firefox/profiles.ini &> /dev/null || :
+echo -e "[General]\nStartWithLastProfile=1\n\n[Profile0]\nName=default\nIsRelative=1\nPath=$PROFILE" > /etc/skel/.mozilla/firefox/profiles.ini
+cp -f %{_libdir}/firefox/defaults/preferences/all-ojuba.js /etc/skel/.mozilla/firefox/$PROFILE/prefs.js &> /dev/null || :
+
+%preun
+rm -rf /etc/skel/.mozilla/firefox &> /dev/null || :
 
 %triggerin -- firefox
 for i in %{_libdir}/firefox-*
@@ -46,13 +56,13 @@ do
    for j in %{searchplugins}
    do
      mkdir -p $i/searchplugins/ || :
-     ln -sf %{_libdir}/firefox/searchplugins/$j $i/searchplugins/$j
+     ln -sf %{_libdir}/firefox/searchplugins/$j $i/searchplugins/$j &> /dev/null || :
    done
    mkdir -p $i/defaults/preferences/ || :
-   ln -sf %{_libdir}/firefox/defaults/preferences/all-ojuba.js $i/defaults/preferences/all-ojuba.js
+   ln -sf %{_libdir}/firefox/defaults/preferences/all-ojuba.js $i/defaults/preferences/all-ojuba.js &> /dev/null || :
    mkdir -p $i/firefox/defaults/profile/ || :
-   ln -sf %{_libdir}/firefox/defaults/profile/localstore.rdf $i/defaults/profile/localstore.rdf
-   ln -sf %{_libdir}/firefox/ojuba-browserconfig.properties $i/ojuba-browserconfig.properties
+   ln -sf %{_libdir}/firefox/defaults/profile/localstore.rdf $i/defaults/profile/localstore.rdf &> /dev/null || :
+   ln -sf %{_libdir}/firefox/ojuba-browserconfig.properties $i/ojuba-browserconfig.properties &> /dev/null || :
  fi
 done
 
@@ -63,11 +73,11 @@ do
    
    for j in %{searchplugins}
    do
-     [ -e $i/searchplugins/$j ] && rm $i/searchplugins/$j
+     [ -e $i/searchplugins/$j ] && rm $i/searchplugins/$j &> /dev/null
    done
-   [ -e $i/defaults/profile/localstore.rdf ] && rm -f $i/defaults/profile/localstore.rdf
-   [ -e $i/defaults/preferences/all-ojuba.js ] && rm $i/defaults/preferences/all-ojuba.js
-   [ -e $i/ojuba-browserconfig.properties ] && rm $i/ojuba-browserconfig.properties
+   [ -e $i/defaults/profile/localstore.rdf ] && rm -f $i/defaults/profile/localstore.rdf &> /dev/null
+   [ -e $i/defaults/preferences/all-ojuba.js ] && rm -f $i/defaults/preferences/all-ojuba.js &> /dev/null
+   [ -e $i/ojuba-browserconfig.properties ] && rm -f $i/ojuba-browserconfig.properties &> /dev/null
  fi
 done
 
