@@ -1,5 +1,5 @@
 Name:           firefox-ojuba-extra
-Version:        2.0.0
+Version:        2.0.1
 Release:        4
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
@@ -46,7 +46,7 @@ mkdir -p /etc/skel/.mozilla/firefox/$PROFILE/ &> /dev/null || :
 echo -e "[General]\nStartWithLastProfile=1\n\n[Profile0]\nName=default\nIsRelative=1\nPath=$PROFILE" > /etc/skel/.mozilla/firefox/profiles.ini
 cp -f %{_libdir}/firefox/defaults/preferences/all-ojuba.js /etc/skel/.mozilla/firefox/$PROFILE/prefs.js &> /dev/null || :
 
-%preun
+%postun
 rm -rf /etc/skel/.mozilla/firefox &> /dev/null || :
 
 %triggerin -- firefox
