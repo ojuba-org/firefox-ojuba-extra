@@ -1,11 +1,11 @@
 Name:           firefox-ojuba-extra
-Version:        2.0.1
+Version:        2.0.2
 Release:        4
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
 License:        Waqf
 URL:            http://www.ojuba.org/
-Source:         %{name}.tar.gz
+Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 Requires(post):	firefox,desktop-file-utils
@@ -16,7 +16,7 @@ Requires:	ojuba-release-notes >= 1
 This package contains the default configuration for firefox in Ojuba Linux.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-%{version}
 
 %build
 
