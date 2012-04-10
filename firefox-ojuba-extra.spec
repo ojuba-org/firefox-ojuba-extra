@@ -1,6 +1,6 @@
 Name:           firefox-ojuba-extra
-Version:        2.0.2
-Release:        4
+Version:        2.0.3
+Release:        1
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
 License:        Waqf
@@ -29,8 +29,6 @@ cp -a searchplugins/* $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
 
 install -D -p -m 644 all-ojuba.js $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/preferences/all-ojuba.js
 install -D -p -m 644 firefox-swf.desktop $RPM_BUILD_ROOT/%{_datadir}/applications/firefox-swf.desktop
-
-echo "browser.startup.homepage=file:///usr/share/doc/HTML/index.html" > $RPM_BUILD_ROOT%{_libdir}/firefox/ojuba-browserconfig.properties
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -62,7 +60,6 @@ do
    ln -sf %{_libdir}/firefox/defaults/preferences/all-ojuba.js $i/defaults/preferences/all-ojuba.js &> /dev/null || :
    mkdir -p $i/firefox/defaults/profile/ || :
    ln -sf %{_libdir}/firefox/defaults/profile/localstore.rdf $i/defaults/profile/localstore.rdf &> /dev/null || :
-   ln -sf %{_libdir}/firefox/ojuba-browserconfig.properties $i/ojuba-browserconfig.properties &> /dev/null || :
  fi
 done
 
@@ -77,13 +74,11 @@ do
    done
    [ -e $i/defaults/profile/localstore.rdf ] && rm -f $i/defaults/profile/localstore.rdf &> /dev/null
    [ -e $i/defaults/preferences/all-ojuba.js ] && rm -f $i/defaults/preferences/all-ojuba.js &> /dev/null
-   [ -e $i/ojuba-browserconfig.properties ] && rm -f $i/ojuba-browserconfig.properties &> /dev/null
  fi
 done
 
 %files
 %defattr(-,root,root,-)
-%{_libdir}/firefox/ojuba-browserconfig.properties
 %{_libdir}/firefox/searchplugins/*
 %{_libdir}/firefox/defaults/preferences/all-ojuba.js
 %{_libdir}/firefox/defaults/profile/localstore.rdf
