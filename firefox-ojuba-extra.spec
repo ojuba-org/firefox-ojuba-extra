@@ -1,27 +1,31 @@
+%global owner ojuba-org
+%global commit #Write commit number here
+%define searchplugins ojuba.xml islamqa.xml islamweb.xml
+
 Name:           firefox-ojuba-extra
 Version:        2.0.3
-Release:        1
+Release:	2%{?dist}
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
-License:        Waqf
-URL:            http://www.ojuba.org/
-Source:         %{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+License:	WAQFv2
+URL:            http://ojuba.org/
+Source:		https://github.com/%{owner}/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
 BuildArch:      noarch
-Requires(post):	firefox,desktop-file-utils
-Requires:	ojuba-release-notes >= 1
-%define searchplugins ojuba.xml islamqa.xml islamweb.xml
+Requires(post):	firefox
+Requires(post):	desktop-file-utils
+
+#Requires:	ojuba-release-notes >= 1
 
 %description
 This package contains the default configuration for firefox in Ojuba Linux.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{commit}
 
 %build
+#No Thing To Build
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/profile/
 cp localstore.rdf $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/profile/
@@ -29,9 +33,6 @@ cp -a searchplugins/* $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
 
 install -D -p -m 644 all-ojuba.js $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/preferences/all-ojuba.js
 install -D -p -m 644 firefox-swf.desktop $RPM_BUILD_ROOT/%{_datadir}/applications/firefox-swf.desktop
-
-%clean
-%{__rm} -rf $RPM_BUILD_ROOT
 
 %posttrans
 desktop-file-install --rebuild-mime-info-cache %{_datadir}/applications/firefox-swf.desktop &> /dev/null || :
@@ -85,6 +86,9 @@ done
 %{_datadir}/applications/firefox-swf.desktop
 
 %changelog
+* Sun Feb 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 2.0.3-2
+- General Revision.
+
 * Thu Jun 17 2010  Muayyad Saleh Alsadi <alsadi@ojuba.org> - 2.0.0-2
 - use a source tarball
 
@@ -102,4 +106,3 @@ done
 
 * Tue May 20 2008 Muayyad Saleh Alsadi <alsadi@ojuba.org> - 1.0.0-1
 - Initial version
-
