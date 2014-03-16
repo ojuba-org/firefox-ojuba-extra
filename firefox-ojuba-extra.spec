@@ -4,13 +4,13 @@
 
 Name:           firefox-ojuba-extra
 Version:        2.0.3
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
 License:	WAQFv2
 URL:            http://ojuba.org/
 Source:		https://github.com/%{owner}/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
-BuildArch:      noarch
+#BuildArch:      noarch
 Requires(post):	firefox
 Requires(post):	desktop-file-utils
 
