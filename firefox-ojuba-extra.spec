@@ -4,7 +4,7 @@
 
 Name:           firefox-ojuba-extra
 Version:        2.0.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:        Ojuba extra files and configurations for firefox
 Group:          Applications/Internet
 License:	WAQFv2
@@ -86,6 +86,9 @@ done
 %{_datadir}/applications/firefox-swf.desktop
 
 %changelog
+* Sun Feb 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 2.0.3-3
+- Add fix for bookmark.
+
 * Sun Feb 16 2014 Mosaab Alzoubi <moceap@hotmail.com> - 2.0.3-2
 - General Revision.
 
