@@ -22,9 +22,6 @@ This package contains the default configuration for firefox in Ojuba Linux.
 %prep
 %setup -q -n %{name}-%{commit}
 
-%build
-#No Thing To Build
-
 %install
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/searchplugins/
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/defaults/profile/
