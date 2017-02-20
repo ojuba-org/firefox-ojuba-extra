@@ -1,6 +1,6 @@
 Name: ojuba-firefox
 Version: 3
-Release: 1%{?dist}
+Release: 3%{?dist}
 Summary: Ojuba Firefox Settings
 Summary(ar): إعدادات أعجوبة لفيرفكس
 License: WAQFv2
@@ -20,12 +20,18 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/firefox/browser/defaults/preferences
 echo 'pref("browser.startup.homepage", "data:text/plain,browser.startup.homepage=http://ojuba.org");
 pref("ui.key.menuAccessKeyFocuses",false);
 pref("general.autoScroll", true);
-pref("browser.bookmarks.restore_default_bookmarks", true);' > $RPM_BUILD_ROOT%{_libdir}/firefox/browser/defaults/preferences/firefox-ojuba-default-prefs.js
+pref("extensions.htitle.hide_mode", 2);' > $RPM_BUILD_ROOT%{_libdir}/firefox/browser/defaults/preferences/firefox-ojuba-default-prefs.js
 
 %files
 %{_libdir}/firefox/browser/defaults/preferences/firefox-ojuba-default-prefs.js
 
 %changelog
+* Fri Feb 3 2017 Mosaab Alzoubi <moceap@hotmail.com> - 3-3
+- Disable bookmarks till Fix #1197497
+
+* Fri Feb 3 2017 Mosaab Alzoubi <moceap@hotmail.com> - 3-2
+- Always Htitle enabled
+
 * Fri Feb 3 2017 Mosaab Alzoubi <moceap@hotmail.com> - 3-1
 - Simplized
 - Remove SWF local run for security reason
